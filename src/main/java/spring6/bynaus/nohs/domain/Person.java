@@ -26,6 +26,6 @@ public class Person {
     private String lastName;
     private String address;
 
-    @OneToMany(mappedBy = "person")
-    private Set<Post> posts;
+    // @OneToMany(mappedBy = "author")
+    // private Set<Post> posts;
 }

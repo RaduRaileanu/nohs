@@ -1,7 +1,2 @@
-spring6/bynaus/lomboktest/mappers/PersonMapperImpl.class
-spring6/bynaus/lomboktest/models/PersonDTO$PersonDTOBuilder.class
-spring6/bynaus/lomboktest/models/PersonDTO.class
-spring6/bynaus/lomboktest/services/ModerateContent.class
-spring6/bynaus/lomboktest/models/PostDTO.class
-spring6/bynaus/lomboktest/mappers/PostMapperImpl.class
-spring6/bynaus/lomboktest/models/PostDTO$PostDTOBuilder.class
+spring6/bynaus/nohs/mappers/PersonMapperImpl.class
+spring6/bynaus/nohs/mappers/PostMapperImpl.class

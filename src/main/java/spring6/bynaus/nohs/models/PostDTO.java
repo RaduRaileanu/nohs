@@ -10,15 +10,16 @@ import lombok.extern.slf4j.Slf4j;
 public class PostDTO {
     private UUID id;
     private String origContent;
-    private PersonDTO author;
+    // private PersonDTO author;
     private boolean isHateSpeech;
     private String redactedContent;
     private String justification;
-    public PostDTO(UUID id, String origContent, PersonDTO author, boolean isHateSpeech, String redactedContent,
+    // public PostDTO(UUID id, String origContent, PersonDTO author, boolean isHateSpeech, String redactedContent,
+    public PostDTO(UUID id, String origContent, boolean isHateSpeech, String redactedContent,
             String justification) {
         this.id = id;
         this.origContent = origContent;
-        this.author = author;
+        // this.author = author;
         this.isHateSpeech = isHateSpeech;
         this.redactedContent = redactedContent;
         this.justification = justification;
@@ -43,16 +44,16 @@ public class PostDTO {
     public void setOrigContent(String origContent) {
         this.origContent = origContent;
     }
-    public PersonDTO getAuthor() {
-        return author;
-    }
-    public void setAuthor(PersonDTO author) {
-        this.author = author;
-    }
-    public boolean isHateSpeech() {
+    // public PersonDTO getAuthor() {
+    //     return author;
+    // }
+    // public void setAuthor(PersonDTO author) {
+    //     this.author = author;
+    // }
+    public boolean getIsHateSpeech() {
         return isHateSpeech;
     }
-    public void setHateSpeech(boolean isHateSpeech) {
+    public void setIsHateSpeech(boolean isHateSpeech) {
         this.isHateSpeech = isHateSpeech;
     }
     public String getRedactedContent() {
@@ -69,7 +70,8 @@ public class PostDTO {
     }
     @Override
     public String toString() {
-        return "Post [id=" + id + ", origContent=" + origContent + ", author=" + author + ", isHateSpeech="
+        // return "Post [id=" + id + ", origContent=" + origContent + ", author=" + author + ", isHateSpeech="
+        return "Post [id=" + id + ", origContent=" + origContent + ", isHateSpeech="
                 + isHateSpeech + ", redactedContent=" + redactedContent + ", justification=" + justification + "]";
     }
     @Override
@@ -91,11 +93,11 @@ public class PostDTO {
                 return false;
         } else if (!origContent.equals(other.origContent))
             return false;
-        if (author == null) {
-            if (other.author != null)
-                return false;
-        } else if (!author.equals(other.author))
-            return false;
+        // if (author == null) {
+        //     if (other.author != null)
+        //         return false;
+        // } else if (!author.equals(other.author))
+        //     return false;
         if (isHateSpeech != other.isHateSpeech)
             return false;
         if (redactedContent == null) {
@@ -116,7 +118,7 @@ public class PostDTO {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((origContent == null) ? 0 : origContent.hashCode());
-        result = prime * result + ((author == null) ? 0 : author.hashCode());
+        // result = prime * result + ((author == null) ? 0 : author.hashCode());
         result = prime * result + (isHateSpeech ? 1231 : 1237);
         result = prime * result + ((redactedContent == null) ? 0 : redactedContent.hashCode());
         result = prime * result + ((justification == null) ? 0 : justification.hashCode());

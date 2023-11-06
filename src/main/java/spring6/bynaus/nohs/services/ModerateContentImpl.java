@@ -1,10 +1,11 @@
-package spring6.bynaus.lomboktest.services;
+package spring6.bynaus.nohs.services;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ModerateContentImpl implements ModerateContent{
         PostDTO post1 = PostDTO.builder()
                         .id(UUID.randomUUID())
                         .origContent("I like Spring. I hate these stupid Romanians")
-                        .author(new PersonDTO())
+                        // .author(new PersonDTO())
                         .isHateSpeech(true)
                         .redactedContent("I like SPring. ****")
                         .justification("Saying that you hate all people belonging to a nation is a form o bigotism not acceptable unde freedom of speech principles")
@@ -34,7 +35,7 @@ public class ModerateContentImpl implements ModerateContent{
         PostDTO post2 =PostDTO.builder()
                     .id(UUID.randomUUID())
                     .origContent("I like Spring. I hate filthy stupid Slavs")
-                    .author(new PersonDTO())
+                    // .author(new PersonDTO())
                     .isHateSpeech(true)
                     .redactedContent("I like SPring. ****")
                     .justification("Saying that you hate all people belonging to a group is a form o bigotism not acceptable unde freedom of speech principles")
@@ -45,10 +46,10 @@ public class ModerateContentImpl implements ModerateContent{
     }
 
     @Override
-    public PostDTO getModeratedPost(UUID id){
+    public Optional<PostDTO> getModeratedPost(UUID id){
         log.debug(("Get moderated post - in service. Id: " + id.toString()));
 
-        return this.postMap.get(id);
+        return Optional.of(postMap.get(id));
     }
 
     @Override
@@ -61,8 +62,8 @@ public class ModerateContentImpl implements ModerateContent{
         PostDTO savedPost = PostDTO.builder()
                             .id(UUID.randomUUID())
                             .origContent(post.getOrigContent())
-                            .author(post.getAuthor())
-                            .isHateSpeech(post.isHateSpeech())
+                            // .author(post.getAuthor())
+                            .isHateSpeech(post.getIsHateSpeech())
                             .redactedContent(post.getRedactedContent())
                             .justification(post.getJustification())
                             .build();
