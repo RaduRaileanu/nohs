@@ -3,6 +3,8 @@ package spring6.bynaus.nohs.domain;
 import java.util.UUID;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,7 +26,8 @@ public class Post{
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
 
     private String origContent;
@@ -33,6 +36,7 @@ public class Post{
     // @JoinColumn(name = "author_id")
     // private Person author;
     
+    @JdbcTypeCode(SqlTypes.BOOLEAN)
     private boolean isHateSpeech;
     private String redactedContent;
     private String justification;
@@ -48,16 +52,16 @@ public class Post{
     public void setOrigContent(String origContent) {
         this.origContent = origContent;
     }
-    public Person getAuthor() {
-        return author;
-    }
-    public void setAuthor(Person author) {
-        this.author = author;
-    }
-    public boolean setIsHateSpeech() {
+    // public Person getAuthor() {
+    //     return author;
+    // }
+    // public void setAuthor(Person author) {
+    //     this.author = author;
+    // }
+    public boolean getIsHateSpeech() {
         return isHateSpeech;
     }
-    public void getIsHateSpeech(boolean isHateSpeech) {
+    public void setIsHateSpeech(boolean isHateSpeech) {
         this.isHateSpeech = isHateSpeech;
     }
     public String getRedactedContent() {

@@ -53,7 +53,7 @@ public class ModerateContentImpl implements ModerateContent{
     }
 
     @Override
-    public List<PostDTO> getModeratedPosts(){
+    public List<PostDTO> getModeratedPosts(Boolean postStatus){
         return new ArrayList<>(postMap.values());
     }
 

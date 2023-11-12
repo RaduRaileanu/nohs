@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import spring6.bynaus.nohs.models.PostDTO;
 
 public interface ModerateContent {
-    List<PostDTO> getModeratedPosts();
+    List<PostDTO> getModeratedPosts(Boolean postStatus);
     Optional<PostDTO> getModeratedPost(UUID id);
     PostDTO savePost(PostDTO post);
 }

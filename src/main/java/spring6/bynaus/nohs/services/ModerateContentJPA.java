@@ -1,5 +1,6 @@
 package spring6.bynaus.nohs.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import lombok.AllArgsConstructor;
 import spring6.bynaus.nohs.domain.Person;
@@ -56,8 +58,8 @@ public class ModerateContentJPA implements ModerateContent{
                     .justification("Saying that you hate all people belonging to a group is a form o bigotism not acceptable unde freedom of speech principles")
                     .build();
 
-        this.postRepository.save(post1);
-        this.postRepository.save(post2);
+        // this.postRepository.save(post1);
+        // this.postRepository.save(post2);
     }
 
     @Override
@@ -67,11 +69,25 @@ public class ModerateContentJPA implements ModerateContent{
     }
 
     @Override
-    public List<PostDTO> getModeratedPosts(){
-        return postRepository.findAll()
+    public List<PostDTO> getModeratedPosts(Boolean postStatus){
+
+        List<Post> postsList;
+        if(postStatus != null){
+            
+            postsList =  getModeratedPostByPostType(postStatus);
+        }
+
+        else {
+            postsList = postRepository.findAll();
+        }
+        return postsList
                 .stream()
                 .map(postMapper::postToPostDTO)
                 .collect(Collectors.toList());
+    }
+
+    public List<Post> getModeratedPostByPostType(boolean pstatus){
+        return postRepository.findAllByIsHateSpeech(pstatus);
     }
 
     @Override

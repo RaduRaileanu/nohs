@@ -7,8 +7,8 @@ import spring6.bynaus.nohs.models.PersonDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-05T12:26:57+0200",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.35.0.v20230814-2020, environment: Java 17.0.8.1 (Eclipse Adoptium)"
+    date = "2023-11-12T15:38:19+0200",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (Oracle Corporation)"
 )
 @Component
 public class PersonMapperImpl implements PersonMapper {
@@ -21,10 +21,10 @@ public class PersonMapperImpl implements PersonMapper {
 
         PersonDTO.PersonDTOBuilder personDTO = PersonDTO.builder();
 
-        personDTO.address( person.getAddress() );
-        personDTO.firstName( person.getFirstName() );
         personDTO.id( person.getId() );
+        personDTO.firstName( person.getFirstName() );
         personDTO.lastName( person.getLastName() );
+        personDTO.address( person.getAddress() );
 
         return personDTO.build();
     }
@@ -37,10 +37,10 @@ public class PersonMapperImpl implements PersonMapper {
 
         Person.PersonBuilder person = Person.builder();
 
-        person.address( personDTO.getAddress() );
-        person.firstName( personDTO.getFirstName() );
         person.id( personDTO.getId() );
+        person.firstName( personDTO.getFirstName() );
         person.lastName( personDTO.getLastName() );
+        person.address( personDTO.getAddress() );
 
         return person.build();
     }

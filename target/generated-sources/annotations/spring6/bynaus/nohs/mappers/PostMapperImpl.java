@@ -7,8 +7,8 @@ import spring6.bynaus.nohs.models.PostDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-05T12:27:54+0200",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.35.0.v20230814-2020, environment: Java 17.0.8.1 (Eclipse Adoptium)"
+    date = "2023-11-12T15:38:20+0200",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (Oracle Corporation)"
 )
 @Component
 public class PostMapperImpl implements PostMapper {
@@ -22,9 +22,10 @@ public class PostMapperImpl implements PostMapper {
         PostDTO.PostDTOBuilder postDTO = PostDTO.builder();
 
         postDTO.id( post.getId() );
-        postDTO.justification( post.getJustification() );
         postDTO.origContent( post.getOrigContent() );
+        postDTO.isHateSpeech( post.getIsHateSpeech() );
         postDTO.redactedContent( post.getRedactedContent() );
+        postDTO.justification( post.getJustification() );
 
         return postDTO.build();
     }
@@ -38,10 +39,10 @@ public class PostMapperImpl implements PostMapper {
         Post.PostBuilder post = Post.builder();
 
         post.id( postDTO.getId() );
-        post.isHateSpeech( postDTO.getIsHateSpeech() );
-        post.justification( postDTO.getJustification() );
         post.origContent( postDTO.getOrigContent() );
+        post.isHateSpeech( postDTO.getIsHateSpeech() );
         post.redactedContent( postDTO.getRedactedContent() );
+        post.justification( postDTO.getJustification() );
 
         return post.build();
     }
