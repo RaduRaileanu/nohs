@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>spring6.bynaus</groupId>
-	<artifactId>lombok-test</artifactId>
+	<artifactId>nohs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>lombok-test</name>
+	<name>nohs</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
