@@ -11,14 +11,14 @@ public class PersonDTO {
     private String firstName;
     private String lastName;
     private String address;
-    // private Set<PostDTO> posts;
-    // public PersonDTO(UUID id, String firstName, String lastName, String address, Set<PostDTO> posts) {
-    public PersonDTO(UUID id, String firstName, String lastName, String address) {
+    private Set<PostDTO> posts;
+    public PersonDTO(UUID id, String firstName, String lastName, String address, Set<PostDTO> posts) {
+    // public PersonDTO(UUID id, String firstName, String lastName, String address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        // this.posts = posts;
+        this.posts = posts;
     }
     public PersonDTO() {
     }

@@ -50,7 +50,6 @@ public class ModerationCtrl {
         HttpHeaders headers = new HttpHeaders();
 
         headers.add("Location", "/api/post/mposts" + savedPost.getId().toString());
-        
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
     

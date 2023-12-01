@@ -73,7 +73,7 @@ public class ModerateContentJPA implements ModerateContent{
 
         List<Post> postsList;
         if(postStatus != null){
-            
+
             postsList =  getModeratedPostByPostType(postStatus);
         }
 
@@ -93,7 +93,15 @@ public class ModerateContentJPA implements ModerateContent{
     @Override
     public PostDTO savePost(PostDTO postDTO){
 
-        return postMapper.postToPostDTO(postRepository.save(postMapper.postDTOToPost(postDTO)));
+        Person author = personRepository.findById(UUID.fromString("057d3ffc-358b-4485-8bcc-b029121b875e")).orElse(null);
+        
+        Post post = postRepository.save(postMapper.postDTOToPost(postDTO));
+
+        post.setAuthor(author);
+
+        Post savedPost = postRepository.saveAndFlush(post);
+
+        return postMapper.postToPostDTO(savedPost);
         
     }
 }

@@ -7,6 +7,6 @@ import spring6.bynaus.nohs.models.PersonDTO;
 
 @Mapper
 public interface PersonMapper {
-    PersonDTO PersonToPersonDTO(Person person);
-    Person PersonDTOToPerson(PersonDTO personDTO);
+    PersonDTO personToPersonDTO(Person person);
+    Person personDTOToPerson(PersonDTO personDTO);
 }

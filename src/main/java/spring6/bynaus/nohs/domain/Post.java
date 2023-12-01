@@ -32,9 +32,9 @@ public class Post{
 
     private String origContent;
 
-    // @ManyToOne(cascade = CascadeType.PERSIST)
-    // @JoinColumn(name = "author_id")
-    // private Person author;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "person_id")
+    private Person author;
     
     @JdbcTypeCode(SqlTypes.BOOLEAN)
     private boolean isHateSpeech;
@@ -52,12 +52,12 @@ public class Post{
     public void setOrigContent(String origContent) {
         this.origContent = origContent;
     }
-    // public Person getAuthor() {
-    //     return author;
-    // }
-    // public void setAuthor(Person author) {
-    //     this.author = author;
-    // }
+    public Person getAuthor() {
+        return author;
+    }
+    public void setAuthor(Person author) {
+        this.author = author;
+    }
     public boolean getIsHateSpeech() {
         return isHateSpeech;
     }

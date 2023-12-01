@@ -18,7 +18,7 @@ import spring6.bynaus.lomboktest.models.PostDTO;
 public class PersonMapperImpl implements PersonMapper {
 
     @Override
-    public PersonDTO PersonToPersonDTO(Person person) {
+    public PersonDTO personToPersonDTO(Person person) {
         if ( person == null ) {
             return null;
         }
@@ -35,7 +35,7 @@ public class PersonMapperImpl implements PersonMapper {
     }
 
     @Override
-    public Person PersonDTOToPerson(PersonDTO personDTO) {
+    public Person personDTOToPerson(PersonDTO personDTO) {
         if ( personDTO == null ) {
             return null;
         }
@@ -59,7 +59,7 @@ public class PersonMapperImpl implements PersonMapper {
 
         postDTO.id( post.getId() );
         postDTO.origContent( post.getOrigContent() );
-        postDTO.author( PersonToPersonDTO( post.getAuthor() ) );
+        postDTO.author( personToPersonDTO( post.getAuthor() ) );
         postDTO.redactedContent( post.getRedactedContent() );
         postDTO.justification( post.getJustification() );
 
