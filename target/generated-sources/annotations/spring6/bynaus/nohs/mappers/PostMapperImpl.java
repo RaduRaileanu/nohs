@@ -7,8 +7,8 @@ import spring6.bynaus.nohs.models.PostDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-30T21:07:07+0200",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.35.0.v20230814-2020, environment: Java 17.0.8.1 (Eclipse Adoptium)"
+    date = "2023-12-13T09:02:06+0200",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 17.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class PostMapperImpl implements PostMapper {
