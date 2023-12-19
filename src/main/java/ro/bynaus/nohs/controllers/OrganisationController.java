@@ -55,18 +55,22 @@ public class OrganisationController {
     @PutMapping(ORG_BY_ID_PATH)
     Mono<ResponseEntity<Void>> updateOrganisation(@PathVariable("orgId") Integer orgId, @RequestBody OrganisationDTO organisationDTO) {
         return organisationService.updateOrganisation(orgId, organisationDTO)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
                 .map(updatedOrganisationDTO -> ResponseEntity.ok().build());
     }
     
     @PatchMapping(ORG_BY_ID_PATH)
     Mono<ResponseEntity<Void>> patchOrganisation(@PathVariable("orgId") Integer orgId, @RequestBody OrganisationDTO organisationDTO){
         return organisationService.patchOrganisation(orgId, organisationDTO)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
                 .map(updatedOrganisationDTO -> ResponseEntity.ok().build());
     }
 
     @DeleteMapping(ORG_BY_ID_PATH)
     Mono<ResponseEntity<Void>> deleteOrganisation(@PathVariable("orgId") Integer orgId){
-        return organisationService.deleteOrganisation(orgId)
+        return organisationService.getOrganisationById(orgId)
+            .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
+            .map(foundOrg -> organisationService.deleteOrganisation(foundOrg.getId()))
             .thenReturn(ResponseEntity.noContent().build());
     }
 

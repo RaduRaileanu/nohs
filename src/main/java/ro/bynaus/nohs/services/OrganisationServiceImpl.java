@@ -64,6 +64,7 @@ public class OrganisationServiceImpl implements OrganisationService{
     }
 
     public Mono<Void> deleteOrganisation(Integer orgId){
-        return organisationRepository.deleteById(orgId);
+        organisationRepository.deleteById(orgId).subscribe();
+        return Mono.empty();
     }
 }
