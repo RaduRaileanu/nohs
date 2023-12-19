@@ -1,11 +1,13 @@
 package ro.bynaus.nohs.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
@@ -32,13 +34,13 @@ public class OrganisationController {
 
     @GetMapping(ORG_PATH)
     Flux<OrganisationDTO> listOrganisations(){
-        // return Flux.just(OrganisationDTO.builder().id(1).build(), OrganisationDTO.builder().id(2).build());
         return organisationService.listOrganisations();
     }
 
     @GetMapping(ORG_BY_ID_PATH)
     Mono<OrganisationDTO> getOrganisationById(@PathVariable("orgId") Integer orgId) {
-        return organisationService.getOrganisationById(orgId);
+        return organisationService.getOrganisationById(orgId)
+                    .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)));
     }
 
     @PostMapping(ORG_PATH)
@@ -65,7 +67,7 @@ public class OrganisationController {
     @DeleteMapping(ORG_BY_ID_PATH)
     Mono<ResponseEntity<Void>> deleteOrganisation(@PathVariable("orgId") Integer orgId){
         return organisationService.deleteOrganisation(orgId)
-            .map(response -> ResponseEntity.noContent().build());
+            .thenReturn(ResponseEntity.noContent().build());
     }
 
 }
