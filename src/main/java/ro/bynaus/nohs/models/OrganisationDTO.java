@@ -1,6 +1,7 @@
 package ro.bynaus.nohs.models;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,14 +12,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PaymentDTO {
-    
+public class OrganisationDTO {
+
     private Integer id;
+    private String name;
+    private String code;
 
-    private Double sum;
-    private String invoiceNo;
+    private SubscriptionDTO subscription;
 
-    private OrganisationDTO organisation;
+    private Set<PaymentDTO> payments;
 
     private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
+    
+    private LocalDateTime deletedAt;
 }
