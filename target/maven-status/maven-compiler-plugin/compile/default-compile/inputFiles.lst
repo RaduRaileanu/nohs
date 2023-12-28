@@ -12,6 +12,7 @@
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/models/OrganisationDTO.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/entities/Service.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/bootstrap/BootstrapData.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/repositories/OrganisationRepository.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/entities/Subscription.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/mappers/OrganisationMapper.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/models/ServiceDTO.java

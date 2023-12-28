@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,7 +38,7 @@ public class Organisation {
     @JoinColumn(name = "subscription_id")
     private Subscription subscription;
 
-    @OneToMany(mappedBy = "organisation")
+    @OneToMany(mappedBy = "organisation", fetch = FetchType.EAGER)
     private Set<Payment> payments;
 
     @CreationTimestamp

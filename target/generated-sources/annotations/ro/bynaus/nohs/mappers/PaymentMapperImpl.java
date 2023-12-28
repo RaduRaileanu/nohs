@@ -8,7 +8,7 @@ import ro.bynaus.nohs.models.PaymentDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-27T18:59:10+0200",
+    date = "2023-12-28T11:09:42+0200",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 17.0.9 (Eclipse Adoptium)"
 )
 @Component
