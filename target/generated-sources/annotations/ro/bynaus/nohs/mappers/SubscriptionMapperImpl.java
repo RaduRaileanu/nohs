@@ -9,8 +9,8 @@ import ro.bynaus.nohs.models.SubscriptionDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-28T11:09:43+0200",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 17.0.9 (Eclipse Adoptium)"
+    date = "2023-12-29T18:09:13+0200",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (Oracle Corporation)"
 )
 @Component
 public class SubscriptionMapperImpl implements SubscriptionMapper {
@@ -23,10 +23,10 @@ public class SubscriptionMapperImpl implements SubscriptionMapper {
 
         Subscription.SubscriptionBuilder subscription = Subscription.builder();
 
-        subscription.ballance( dto.getBallance() );
         subscription.id( dto.getId() );
         subscription.service( serviceDTOToService( dto.getService() ) );
         subscription.trialRequests( dto.getTrialRequests() );
+        subscription.ballance( dto.getBallance() );
 
         return subscription.build();
     }
@@ -39,10 +39,10 @@ public class SubscriptionMapperImpl implements SubscriptionMapper {
 
         SubscriptionDTO.SubscriptionDTOBuilder subscriptionDTO = SubscriptionDTO.builder();
 
-        subscriptionDTO.ballance( subscription.getBallance() );
         subscriptionDTO.id( subscription.getId() );
         subscriptionDTO.service( serviceToServiceDTO( subscription.getService() ) );
         subscriptionDTO.trialRequests( subscription.getTrialRequests() );
+        subscriptionDTO.ballance( subscription.getBallance() );
 
         return subscriptionDTO.build();
     }
@@ -55,8 +55,8 @@ public class SubscriptionMapperImpl implements SubscriptionMapper {
         Service.ServiceBuilder service = Service.builder();
 
         service.id( serviceDTO.getId() );
-        service.message( serviceDTO.getMessage() );
         service.type( serviceDTO.getType() );
+        service.message( serviceDTO.getMessage() );
 
         return service.build();
     }
@@ -69,8 +69,8 @@ public class SubscriptionMapperImpl implements SubscriptionMapper {
         ServiceDTO.ServiceDTOBuilder serviceDTO = ServiceDTO.builder();
 
         serviceDTO.id( service.getId() );
-        serviceDTO.message( service.getMessage() );
         serviceDTO.type( service.getType() );
+        serviceDTO.message( service.getMessage() );
 
         return serviceDTO.build();
     }

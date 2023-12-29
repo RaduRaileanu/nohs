@@ -13,22 +13,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OrganisationDTO {
+public class BillingInfoDTO {
 
     private Integer id;
-    private String name;
-    private String code;
 
-    private SubscriptionDTO subscription;
-    private BillingInfoDTO billingInfo;
-
-    // private Set<PaymentDTO> payments;
-    // private Set<UserWithoutOrgDTO> users;
+    private String city;
+    private String country;
+    private String street;
+    private String streetNo;
+    private String other;
+    private String taxNo;
+    private String idNumber;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
-
     
     private LocalDateTime deletedAt;
 }

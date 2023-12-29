@@ -6,17 +6,24 @@ import java.util.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import ro.bynaus.nohs.entities.BillingInfo;
 import ro.bynaus.nohs.entities.Organisation;
 import ro.bynaus.nohs.entities.Payment;
 import ro.bynaus.nohs.entities.Service;
 import ro.bynaus.nohs.entities.Subscription;
+import ro.bynaus.nohs.entities.User;
 import ro.bynaus.nohs.mappers.OrganisationMapper;
+import ro.bynaus.nohs.mappers.UserMapper;
 import ro.bynaus.nohs.models.OrganisationDTO;
+import ro.bynaus.nohs.models.UserDTO;
+import ro.bynaus.nohs.repositories.BillingInfoRepository;
 import ro.bynaus.nohs.repositories.OrganisationRepository;
 import ro.bynaus.nohs.repositories.PaymentRepository;
 import ro.bynaus.nohs.repositories.ServiceRepository;
 import ro.bynaus.nohs.repositories.SubscriptionRepository;
+import ro.bynaus.nohs.repositories.UserRepository;
 
 @Component
 @RequiredArgsConstructor
@@ -27,28 +34,47 @@ public class BootstrapData implements CommandLineRunner{
     private final SubscriptionRepository subscriptionRepository;
     private final PaymentRepository paymentRepository;
     private final OrganisationRepository organisationRepository;
+    private final BillingInfoRepository billingInfoRepository;
+    private final UserRepository userRepository;
+
 
     //mappers
     private final OrganisationMapper organisationMapper;
+    private final UserMapper userMapper;
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         // loadSubscriptions();
         // loadPayments();
         // loadOrganisations();
+        // loadBillingInfo();
+        // loadUser();
         long serviceCount = serviceRepository.count();
         System.out.println("Services no: " + serviceCount);
         long paymentsCount = paymentRepository.count();
         System.out.println("Payments no: " + paymentsCount);
-        long organisationsCount = paymentRepository.count();
+        long organisationsCount = organisationRepository.count();
         System.out.println("Organisations no: " + organisationsCount);
         long subscriptionCount = subscriptionRepository.count();
         System.out.println("Subscriptions no: " + subscriptionCount);
+        long billingInfoCount = billingInfoRepository.count();
+        System.out.println("Billing info no: " + billingInfoCount);
+        long userCount = userRepository.count();
+        System.out.println("Users no: " +userCount);
 
-        // Organisation organisation = organisationRepository.findFirstByOrderByIdAsc().orElse(null);
-        // OrganisationDTO orgDto = organisationMapper.organisationToOrganisationDTO(organisation);
-        // System.out.println(orgDto.getSubscription().getBallance());
+        Organisation organisation = organisationRepository.findFirstByOrderByIdAsc().orElse(null);
+        
+        BillingInfo billingInfo = billingInfoRepository.findFirstByOrderByIdAsc().orElse(null);
 
+        organisation.setBillingInfo(billingInfo);
+        OrganisationDTO orgDto = organisationMapper.organisationToOrganisationDTO(organisation);
+        System.out.println(orgDto.getBillingInfo().getCity());
+        System.out.println("Organisation's users count: " + organisation.getUsers().size());
+
+        User user = userRepository.findFirstByOrderByIdAsc().orElse(null);
+        System.out.println("User's organisation subscription ballance is " +
+                        user.getOrganisation().getSubscription().getBallance());
     }
 
     private void loadSubscriptions(){
@@ -89,5 +115,72 @@ public class BootstrapData implements CommandLineRunner{
                                                     .build();
         
         organisationRepository.save(organisation1);
+    }
+
+    private void loadBillingInfo(){
+        BillingInfo billingInfo = BillingInfo.builder()
+                                                .city("Testville")
+                                                .country("Testonia")
+                                                .street("Test Lake Avenue")
+                                                .streetNo("11")
+                                                .other("Apt 8")
+                                                .taxNo("TST000123")
+                                                .build();
+                    
+        billingInfoRepository.save(billingInfo);
+    }
+
+    private void loadUser(){
+        Organisation organisation = organisationRepository.findFirstByOrderByIdAsc().orElse(null);
+        // System.out.println("Retrievend organisation's users no: " + organisation.getUsers().size());
+        // User user = User.builder()
+        //                     .firstName("Testy")
+        //                     .lastName("Testescu")
+        //                     .email("ttestescu@testco.test")
+        //                     .password("unsaltedpassword")
+        //                     .role("admin")
+        //                     .build();
+
+        // Set<User> orgUsers = organisation.getUsers();
+        // orgUsers.add(user);
+        // organisation.setUsers(orgUsers);
+        // Organisation savedOrganisation = organisationRepository.saveAndFlush(organisation);
+        // System.out.println("Saved org id" + savedOrganisation.getId());
+        // user.setOrganisation(savedOrganisation);
+        // userRepository.save(user);
+        // organisationRepository.save(savedOrganisation);
+
+        // OrganisationDTO orgDto = organisationMapper.organisationToOrganisationDTO(savedOrganisation);
+        // System.out.println(orgDto.getUsers().size());
+
+        
+        OrganisationDTO orgDTO = organisationMapper.organisationToOrganisationDTO(organisation);
+
+        UserDTO userDto = UserDTO.builder()
+                                    .firstName("Testy")
+                                    .lastName("Testescu")
+                                    .email("ttestescu@testco.test")
+                                    .password("unsaltedpassword")
+                                    .role("admin")
+                                    .build();
+        
+        
+
+        // Set<UserDTO> orgUsers = orgDTO.getUsers();
+        // orgUsers.add(userDto);
+        // orgDTO.setUsers(orgUsers);
+
+        userDto.setOrganisation(orgDTO);
+
+        User user = userMapper.userDtoToUser(userDto);
+
+        Set<User> orgUsers = organisation.getUsers();
+        orgUsers.add(user);
+        organisation.setUsers(orgUsers);
+
+        // Organisation updatedOrganisation = organisationMapper.organisationDTOToOrganisation(orgDTO);
+
+        userRepository.save(user);
+        organisationRepository.saveAndFlush(organisation);
     }
 }
