@@ -1,6 +1,8 @@
 package ro.bynaus.nohs.bootstrap;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
@@ -11,16 +13,20 @@ import lombok.RequiredArgsConstructor;
 import ro.bynaus.nohs.entities.BillingInfo;
 import ro.bynaus.nohs.entities.Organisation;
 import ro.bynaus.nohs.entities.Payment;
+import ro.bynaus.nohs.entities.Post;
 import ro.bynaus.nohs.entities.Service;
 import ro.bynaus.nohs.entities.Subscription;
 import ro.bynaus.nohs.entities.User;
 import ro.bynaus.nohs.mappers.OrganisationMapper;
 import ro.bynaus.nohs.mappers.UserMapper;
+import ro.bynaus.nohs.mappers.PostMapper;
 import ro.bynaus.nohs.models.OrganisationDTO;
+import ro.bynaus.nohs.models.PostDTO;
 import ro.bynaus.nohs.models.UserDTO;
 import ro.bynaus.nohs.repositories.BillingInfoRepository;
 import ro.bynaus.nohs.repositories.OrganisationRepository;
 import ro.bynaus.nohs.repositories.PaymentRepository;
+import ro.bynaus.nohs.repositories.PostRepository;
 import ro.bynaus.nohs.repositories.ServiceRepository;
 import ro.bynaus.nohs.repositories.SubscriptionRepository;
 import ro.bynaus.nohs.repositories.UserRepository;
@@ -36,11 +42,13 @@ public class BootstrapData implements CommandLineRunner{
     private final OrganisationRepository organisationRepository;
     private final BillingInfoRepository billingInfoRepository;
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
 
     //mappers
     private final OrganisationMapper organisationMapper;
     private final UserMapper userMapper;
+    private final PostMapper postMapper;
 
     @Override
     @Transactional
@@ -50,6 +58,7 @@ public class BootstrapData implements CommandLineRunner{
         // loadOrganisations();
         // loadBillingInfo();
         // loadUser();
+        loadPost();
         long serviceCount = serviceRepository.count();
         System.out.println("Services no: " + serviceCount);
         long paymentsCount = paymentRepository.count();
@@ -75,6 +84,12 @@ public class BootstrapData implements CommandLineRunner{
         User user = userRepository.findFirstByOrderByIdAsc().orElse(null);
         System.out.println("User's organisation subscription ballance is " +
                         user.getOrganisation().getSubscription().getBallance());
+
+        List<Post> userPosts = new ArrayList<>(user.getPosts());
+
+        PostDTO userPostsDto = postMapper.postToPostDto(userPosts.get(0));
+
+        System.out.println(userPostsDto.toString());
     }
 
     private void loadSubscriptions(){
@@ -170,17 +185,58 @@ public class BootstrapData implements CommandLineRunner{
         // orgUsers.add(userDto);
         // orgDTO.setUsers(orgUsers);
 
-        userDto.setOrganisation(orgDTO);
+        // userDto.setOrganisation(orgDTO);
 
         User user = userMapper.userDtoToUser(userDto);
 
         Set<User> orgUsers = organisation.getUsers();
         orgUsers.add(user);
         organisation.setUsers(orgUsers);
+        Organisation savedOrg = organisationRepository.saveAndFlush(organisation);
 
+        user.setOrganisation(savedOrg);
         // Organisation updatedOrganisation = organisationMapper.organisationDTOToOrganisation(orgDTO);
 
         userRepository.save(user);
-        organisationRepository.saveAndFlush(organisation);
+        // organisationRepository.saveAndFlush(organisation);
+    }
+
+    private void loadPost(){
+        User user = userRepository.findFirstByOrderByIdAsc().orElse(null);
+        UserDTO userDto = userMapper.userToUserDto(user);
+
+        PostDTO postDTO = PostDTO.builder()
+                                    .originalContent("I hate all Romanians. But I'm learning Spring!")
+                                    .build();
+        
+        String hateContent = "I hate all Romanians";
+        String replacement = "***";
+        String justification = "Affirming hatred towards a nation is not protected by freedom of speech";
+
+        String redactedContent = postDTO.getOriginalContent().replace(hateContent, replacement);
+
+        postDTO.setRedactedContent(redactedContent);
+        postDTO.setHateSpeech(true);
+        postDTO.setJustification(justification);
+        // postDTO.setOrganisationDto(null);
+
+        // postDTO.setUserDto(userDto);
+
+        Post post = postMapper.postDtoToPost(postDTO);
+        // System.out.println(post.getOrganisation().toString());
+        // System.out.println("post.getOrganisation().toString()");
+        // post.setUser(user);
+
+        Set<Post> userPosts = user.getPosts();
+        userPosts.add(post);
+        user.setPosts(userPosts);
+
+        User savedUser = userRepository.saveAndFlush(user);
+
+        post.setOrganisation(null);
+        post.setUser(savedUser);
+
+        postRepository.save(post);
+        // userRepository.saveAndFlush(user);
     }
 }

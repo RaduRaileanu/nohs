@@ -51,6 +51,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Payment> payments;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Post> posts;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

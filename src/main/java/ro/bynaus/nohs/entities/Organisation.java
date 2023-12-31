@@ -50,6 +50,9 @@ public class Organisation {
     @OneToMany(mappedBy = "organisation")
     private Set<User> users;
 
+    @OneToMany(mappedBy =  "organisation")
+    private Set<Post> posts;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
