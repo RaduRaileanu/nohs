@@ -20,8 +20,8 @@ import ro.bynaus.nohs.models.UserDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-31T06:49:09+0200",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 17.0.9 (Eclipse Adoptium)"
+    date = "2024-01-09T07:42:56+0200",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (Oracle Corporation)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -39,19 +39,19 @@ public class UserMapperImpl implements UserMapper {
 
         User.UserBuilder user = User.builder();
 
-        user.billingInfo( billingInfoDTOToBillingInfo( dto.getBillingInfo() ) );
-        user.createdAt( dto.getCreatedAt() );
-        user.deletedAt( dto.getDeletedAt() );
-        user.email( dto.getEmail() );
-        user.firstName( dto.getFirstName() );
         user.id( dto.getId() );
+        user.firstName( dto.getFirstName() );
         user.lastName( dto.getLastName() );
-        user.organisation( organisationDTOToOrganisation1( dto.getOrganisation() ) );
+        user.email( dto.getEmail() );
         user.password( dto.getPassword() );
-        user.payments( paymentDTOSetToPaymentSet( dto.getPayments() ) );
         user.role( dto.getRole() );
+        user.organisation( organisationDTOToOrganisation1( dto.getOrganisation() ) );
         user.subscription( subscriptionDTOToSubscription( dto.getSubscription() ) );
+        user.billingInfo( billingInfoDTOToBillingInfo( dto.getBillingInfo() ) );
+        user.payments( paymentDTOSetToPaymentSet( dto.getPayments() ) );
+        user.createdAt( dto.getCreatedAt() );
         user.updatedAt( dto.getUpdatedAt() );
+        user.deletedAt( dto.getDeletedAt() );
 
         return user.build();
     }
@@ -64,43 +64,21 @@ public class UserMapperImpl implements UserMapper {
 
         UserDTO.UserDTOBuilder userDTO = UserDTO.builder();
 
-        userDTO.billingInfo( billingInfoToBillingInfoDTO( user.getBillingInfo() ) );
-        userDTO.createdAt( user.getCreatedAt() );
-        userDTO.deletedAt( user.getDeletedAt() );
-        userDTO.email( user.getEmail() );
-        userDTO.firstName( user.getFirstName() );
         userDTO.id( user.getId() );
+        userDTO.firstName( user.getFirstName() );
         userDTO.lastName( user.getLastName() );
-        userDTO.organisation( organisationMapper.organisationToOrganisationDTO( user.getOrganisation() ) );
+        userDTO.email( user.getEmail() );
         userDTO.password( user.getPassword() );
-        userDTO.payments( paymentSetToPaymentDTOSet( user.getPayments() ) );
         userDTO.role( user.getRole() );
+        userDTO.organisation( organisationMapper.organisationToOrganisationDTO( user.getOrganisation() ) );
         userDTO.subscription( subscriptionToSubscriptionDTO( user.getSubscription() ) );
+        userDTO.billingInfo( billingInfoToBillingInfoDTO( user.getBillingInfo() ) );
+        userDTO.payments( paymentSetToPaymentDTOSet( user.getPayments() ) );
+        userDTO.createdAt( user.getCreatedAt() );
         userDTO.updatedAt( user.getUpdatedAt() );
+        userDTO.deletedAt( user.getDeletedAt() );
 
         return userDTO.build();
-    }
-
-    protected BillingInfo billingInfoDTOToBillingInfo(BillingInfoDTO billingInfoDTO) {
-        if ( billingInfoDTO == null ) {
-            return null;
-        }
-
-        BillingInfo.BillingInfoBuilder billingInfo = BillingInfo.builder();
-
-        billingInfo.city( billingInfoDTO.getCity() );
-        billingInfo.country( billingInfoDTO.getCountry() );
-        billingInfo.createdAt( billingInfoDTO.getCreatedAt() );
-        billingInfo.deletedAt( billingInfoDTO.getDeletedAt() );
-        billingInfo.id( billingInfoDTO.getId() );
-        billingInfo.idNumber( billingInfoDTO.getIdNumber() );
-        billingInfo.other( billingInfoDTO.getOther() );
-        billingInfo.street( billingInfoDTO.getStreet() );
-        billingInfo.streetNo( billingInfoDTO.getStreetNo() );
-        billingInfo.taxNo( billingInfoDTO.getTaxNo() );
-        billingInfo.updatedAt( billingInfoDTO.getUpdatedAt() );
-
-        return billingInfo.build();
     }
 
     protected Service serviceDTOToService(ServiceDTO serviceDTO) {
@@ -111,8 +89,8 @@ public class UserMapperImpl implements UserMapper {
         Service.ServiceBuilder service = Service.builder();
 
         service.id( serviceDTO.getId() );
-        service.message( serviceDTO.getMessage() );
         service.type( serviceDTO.getType() );
+        service.message( serviceDTO.getMessage() );
 
         return service.build();
     }
@@ -124,12 +102,34 @@ public class UserMapperImpl implements UserMapper {
 
         Subscription.SubscriptionBuilder subscription = Subscription.builder();
 
-        subscription.ballance( subscriptionDTO.getBallance() );
         subscription.id( subscriptionDTO.getId() );
         subscription.service( serviceDTOToService( subscriptionDTO.getService() ) );
         subscription.trialRequests( subscriptionDTO.getTrialRequests() );
+        subscription.ballance( subscriptionDTO.getBallance() );
 
         return subscription.build();
+    }
+
+    protected BillingInfo billingInfoDTOToBillingInfo(BillingInfoDTO billingInfoDTO) {
+        if ( billingInfoDTO == null ) {
+            return null;
+        }
+
+        BillingInfo.BillingInfoBuilder billingInfo = BillingInfo.builder();
+
+        billingInfo.id( billingInfoDTO.getId() );
+        billingInfo.city( billingInfoDTO.getCity() );
+        billingInfo.country( billingInfoDTO.getCountry() );
+        billingInfo.street( billingInfoDTO.getStreet() );
+        billingInfo.streetNo( billingInfoDTO.getStreetNo() );
+        billingInfo.other( billingInfoDTO.getOther() );
+        billingInfo.taxNo( billingInfoDTO.getTaxNo() );
+        billingInfo.idNumber( billingInfoDTO.getIdNumber() );
+        billingInfo.createdAt( billingInfoDTO.getCreatedAt() );
+        billingInfo.updatedAt( billingInfoDTO.getUpdatedAt() );
+        billingInfo.deletedAt( billingInfoDTO.getDeletedAt() );
+
+        return billingInfo.build();
     }
 
     protected Organisation organisationDTOToOrganisation1(OrganisationDTO organisationDTO) {
@@ -139,14 +139,14 @@ public class UserMapperImpl implements UserMapper {
 
         Organisation.OrganisationBuilder organisation = Organisation.builder();
 
-        organisation.billingInfo( billingInfoDTOToBillingInfo( organisationDTO.getBillingInfo() ) );
-        organisation.code( organisationDTO.getCode() );
-        organisation.createdAt( organisationDTO.getCreatedAt() );
-        organisation.deletedAt( organisationDTO.getDeletedAt() );
         organisation.id( organisationDTO.getId() );
         organisation.name( organisationDTO.getName() );
+        organisation.code( organisationDTO.getCode() );
         organisation.subscription( subscriptionDTOToSubscription( organisationDTO.getSubscription() ) );
+        organisation.billingInfo( billingInfoDTOToBillingInfo( organisationDTO.getBillingInfo() ) );
+        organisation.createdAt( organisationDTO.getCreatedAt() );
         organisation.updatedAt( organisationDTO.getUpdatedAt() );
+        organisation.deletedAt( organisationDTO.getDeletedAt() );
 
         return organisation.build();
     }
@@ -164,6 +164,35 @@ public class UserMapperImpl implements UserMapper {
         return set1;
     }
 
+    protected ServiceDTO serviceToServiceDTO(Service service) {
+        if ( service == null ) {
+            return null;
+        }
+
+        ServiceDTO.ServiceDTOBuilder serviceDTO = ServiceDTO.builder();
+
+        serviceDTO.id( service.getId() );
+        serviceDTO.type( service.getType() );
+        serviceDTO.message( service.getMessage() );
+
+        return serviceDTO.build();
+    }
+
+    protected SubscriptionDTO subscriptionToSubscriptionDTO(Subscription subscription) {
+        if ( subscription == null ) {
+            return null;
+        }
+
+        SubscriptionDTO.SubscriptionDTOBuilder subscriptionDTO = SubscriptionDTO.builder();
+
+        subscriptionDTO.id( subscription.getId() );
+        subscriptionDTO.service( serviceToServiceDTO( subscription.getService() ) );
+        subscriptionDTO.trialRequests( subscription.getTrialRequests() );
+        subscriptionDTO.ballance( subscription.getBallance() );
+
+        return subscriptionDTO.build();
+    }
+
     protected BillingInfoDTO billingInfoToBillingInfoDTO(BillingInfo billingInfo) {
         if ( billingInfo == null ) {
             return null;
@@ -171,17 +200,17 @@ public class UserMapperImpl implements UserMapper {
 
         BillingInfoDTO.BillingInfoDTOBuilder billingInfoDTO = BillingInfoDTO.builder();
 
+        billingInfoDTO.id( billingInfo.getId() );
         billingInfoDTO.city( billingInfo.getCity() );
         billingInfoDTO.country( billingInfo.getCountry() );
-        billingInfoDTO.createdAt( billingInfo.getCreatedAt() );
-        billingInfoDTO.deletedAt( billingInfo.getDeletedAt() );
-        billingInfoDTO.id( billingInfo.getId() );
-        billingInfoDTO.idNumber( billingInfo.getIdNumber() );
-        billingInfoDTO.other( billingInfo.getOther() );
         billingInfoDTO.street( billingInfo.getStreet() );
         billingInfoDTO.streetNo( billingInfo.getStreetNo() );
+        billingInfoDTO.other( billingInfo.getOther() );
         billingInfoDTO.taxNo( billingInfo.getTaxNo() );
+        billingInfoDTO.idNumber( billingInfo.getIdNumber() );
+        billingInfoDTO.createdAt( billingInfo.getCreatedAt() );
         billingInfoDTO.updatedAt( billingInfo.getUpdatedAt() );
+        billingInfoDTO.deletedAt( billingInfo.getDeletedAt() );
 
         return billingInfoDTO.build();
     }
@@ -197,34 +226,5 @@ public class UserMapperImpl implements UserMapper {
         }
 
         return set1;
-    }
-
-    protected ServiceDTO serviceToServiceDTO(Service service) {
-        if ( service == null ) {
-            return null;
-        }
-
-        ServiceDTO.ServiceDTOBuilder serviceDTO = ServiceDTO.builder();
-
-        serviceDTO.id( service.getId() );
-        serviceDTO.message( service.getMessage() );
-        serviceDTO.type( service.getType() );
-
-        return serviceDTO.build();
-    }
-
-    protected SubscriptionDTO subscriptionToSubscriptionDTO(Subscription subscription) {
-        if ( subscription == null ) {
-            return null;
-        }
-
-        SubscriptionDTO.SubscriptionDTOBuilder subscriptionDTO = SubscriptionDTO.builder();
-
-        subscriptionDTO.ballance( subscription.getBallance() );
-        subscriptionDTO.id( subscription.getId() );
-        subscriptionDTO.service( serviceToServiceDTO( subscription.getService() ) );
-        subscriptionDTO.trialRequests( subscription.getTrialRequests() );
-
-        return subscriptionDTO.build();
     }
 }
