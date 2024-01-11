@@ -7,8 +7,8 @@ import ro.bynaus.nohs.models.BillingInfoDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-09T07:42:57+0200",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (Oracle Corporation)"
+    date = "2024-01-11T07:25:28+0200",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 17.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class BillingInfoMapperImpl implements BillingInfoMapper {
@@ -21,17 +21,17 @@ public class BillingInfoMapperImpl implements BillingInfoMapper {
 
         BillingInfo.BillingInfoBuilder billingInfo = BillingInfo.builder();
 
-        billingInfo.id( dto.getId() );
         billingInfo.city( dto.getCity() );
         billingInfo.country( dto.getCountry() );
+        billingInfo.createdAt( dto.getCreatedAt() );
+        billingInfo.deletedAt( dto.getDeletedAt() );
+        billingInfo.id( dto.getId() );
+        billingInfo.idNumber( dto.getIdNumber() );
+        billingInfo.other( dto.getOther() );
         billingInfo.street( dto.getStreet() );
         billingInfo.streetNo( dto.getStreetNo() );
-        billingInfo.other( dto.getOther() );
         billingInfo.taxNo( dto.getTaxNo() );
-        billingInfo.idNumber( dto.getIdNumber() );
-        billingInfo.createdAt( dto.getCreatedAt() );
         billingInfo.updatedAt( dto.getUpdatedAt() );
-        billingInfo.deletedAt( dto.getDeletedAt() );
 
         return billingInfo.build();
     }
@@ -44,17 +44,17 @@ public class BillingInfoMapperImpl implements BillingInfoMapper {
 
         BillingInfoDTO.BillingInfoDTOBuilder billingInfoDTO = BillingInfoDTO.builder();
 
-        billingInfoDTO.id( billingInfo.getId() );
         billingInfoDTO.city( billingInfo.getCity() );
         billingInfoDTO.country( billingInfo.getCountry() );
+        billingInfoDTO.createdAt( billingInfo.getCreatedAt() );
+        billingInfoDTO.deletedAt( billingInfo.getDeletedAt() );
+        billingInfoDTO.id( billingInfo.getId() );
+        billingInfoDTO.idNumber( billingInfo.getIdNumber() );
+        billingInfoDTO.other( billingInfo.getOther() );
         billingInfoDTO.street( billingInfo.getStreet() );
         billingInfoDTO.streetNo( billingInfo.getStreetNo() );
-        billingInfoDTO.other( billingInfo.getOther() );
         billingInfoDTO.taxNo( billingInfo.getTaxNo() );
-        billingInfoDTO.idNumber( billingInfo.getIdNumber() );
-        billingInfoDTO.createdAt( billingInfo.getCreatedAt() );
         billingInfoDTO.updatedAt( billingInfo.getUpdatedAt() );
-        billingInfoDTO.deletedAt( billingInfo.getDeletedAt() );
 
         return billingInfoDTO.build();
     }
