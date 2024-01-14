@@ -7,8 +7,8 @@ import ro.bynaus.nohs.models.ServiceDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-11T07:25:28+0200",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 17.0.9 (Eclipse Adoptium)"
+    date = "2024-01-14T13:24:03+0200",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (Oracle Corporation)"
 )
 @Component
 public class ServiceMapperImpl implements ServiceMapper {
@@ -22,8 +22,8 @@ public class ServiceMapperImpl implements ServiceMapper {
         Service.ServiceBuilder service = Service.builder();
 
         service.id( dto.getId() );
-        service.message( dto.getMessage() );
         service.type( dto.getType() );
+        service.message( dto.getMessage() );
 
         return service.build();
     }
@@ -37,8 +37,8 @@ public class ServiceMapperImpl implements ServiceMapper {
         ServiceDTO.ServiceDTOBuilder serviceDTO = ServiceDTO.builder();
 
         serviceDTO.id( service.getId() );
-        serviceDTO.message( service.getMessage() );
         serviceDTO.type( service.getType() );
+        serviceDTO.message( service.getMessage() );
 
         return serviceDTO.build();
     }

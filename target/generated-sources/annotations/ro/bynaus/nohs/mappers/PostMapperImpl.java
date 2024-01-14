@@ -9,8 +9,8 @@ import ro.bynaus.nohs.models.PostDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-11T07:25:29+0200",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.36.0.v20231114-0937, environment: Java 17.0.9 (Eclipse Adoptium)"
+    date = "2024-01-14T13:24:03+0200",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (Oracle Corporation)"
 )
 @Component
 public class PostMapperImpl implements PostMapper {
@@ -23,12 +23,12 @@ public class PostMapperImpl implements PostMapper {
 
         Post.PostBuilder post = Post.builder();
 
-        post.createdAt( dto.getCreatedAt() );
-        post.hateSpeech( dto.getHateSpeech() );
         post.id( dto.getId() );
-        post.justification( dto.getJustification() );
         post.originalContent( dto.getOriginalContent() );
         post.redactedContent( dto.getRedactedContent() );
+        post.hateSpeech( dto.getHateSpeech() );
+        post.justification( dto.getJustification() );
+        post.createdAt( dto.getCreatedAt() );
         post.organisation( postDTOToOrganisation( dto ) );
         post.user( postDTOToUser( dto ) );
 
@@ -43,12 +43,12 @@ public class PostMapperImpl implements PostMapper {
 
         PostDTO.PostDTOBuilder postDTO = PostDTO.builder();
 
-        postDTO.createdAt( post.getCreatedAt() );
-        postDTO.hateSpeech( post.getHateSpeech() );
         postDTO.id( post.getId() );
-        postDTO.justification( post.getJustification() );
         postDTO.originalContent( post.getOriginalContent() );
         postDTO.redactedContent( post.getRedactedContent() );
+        postDTO.hateSpeech( post.getHateSpeech() );
+        postDTO.justification( post.getJustification() );
+        postDTO.createdAt( post.getCreatedAt() );
 
         return postDTO.build();
     }
