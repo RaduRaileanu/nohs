@@ -22,7 +22,6 @@ import ro.bynaus.nohs.security.JwtAuthenticationFilter;
 public class WebSecurityConfig {
     
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
     private final CustomUserDetailService customUserDetailService;
 
     @Bean
@@ -37,7 +36,7 @@ public class WebSecurityConfig {
             .securityMatcher("/**")
             .authorizeHttpRequests(registry -> registry
                     .requestMatchers("/").permitAll()
-                    .requestMatchers("/auth/login").permitAll()
+                    .requestMatchers("/auth/**").permitAll()
                     .anyRequest().authenticated()
             );
 
