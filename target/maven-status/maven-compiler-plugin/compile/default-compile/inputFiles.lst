@@ -4,12 +4,14 @@
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/NohsApplication.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/mappers/BillingInfoMapper.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/repositories/PostRepository.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/controllers/OrganisationController.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/security/CustomUserDetailService.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/repositories/PaymentRepository.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/bootstrap/BootstrapData.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/mappers/PostMapper.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/models/RegisterResponse.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/entities/BillingInfo.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/services/OrganisationServiceImpl.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/controllers/UserController.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/repositories/BillingInfoRepository.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/security/JwtToPrincipalConverter.java
@@ -48,3 +50,4 @@
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/mappers/UserMapper.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/controllers/PostsController.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/repositories/OrganisationRepository.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/services/OrganisationService.java

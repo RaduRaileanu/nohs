@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -97,6 +98,25 @@ public class UserServiceImpl implements UserService {
         UserDTO saveUserDTO = userMapper.userToUserDto(user);
 
         return saveUserDTO;
+    }
+
+    @Override
+    public void softDeleteEmployee(UserPrincipal principal, Integer userId) throws Error {
+       
+        User admin = userRepository.findById(principal.getUserId()).orElse(null);
+        User employee = userRepository.findById(userId).orElse(null);
+
+        if(admin.getRole() != "admin"){
+            throw new Error("The authenticated user is not an admin and cannot delete other employees of their organisation");
+        }
+
+        if(admin.getOrganisation().getId() != employee.getOrganisation().getId()){
+            throw new Error("Employee works for a different organisation that the authenticated user's ");
+        } 
+
+        employee.setDeletedAt(LocalDateTime.now());
+
+        userRepository.saveAndFlush(employee);
     }
     
 }

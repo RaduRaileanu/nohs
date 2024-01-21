@@ -14,5 +14,7 @@ public interface UserService {
 
     public void softDeleteUser(UserPrincipal principal);
 
+    public void softDeleteEmployee(UserPrincipal principal, Integer userId);
+
     public UserDTO restoreUser(UserPrincipal principal);
 }
