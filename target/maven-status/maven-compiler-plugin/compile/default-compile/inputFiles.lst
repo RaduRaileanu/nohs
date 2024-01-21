@@ -1,6 +1,7 @@
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/models/UserWithoutOrgDTO.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/services/PostsServiceImpl.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/controllers/AuthController.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/services/SubscriptionServiceImpl.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/NohsApplication.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/mappers/BillingInfoMapper.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/repositories/PostRepository.java
@@ -13,6 +14,7 @@
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/entities/BillingInfo.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/services/OrganisationServiceImpl.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/controllers/UserController.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/services/SubscriptionService.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/repositories/BillingInfoRepository.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/security/JwtToPrincipalConverter.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/repositories/ServiceRepository.java
@@ -45,6 +47,7 @@
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/models/LoginCredentialsDTO.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/security/UserPrincipal.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/models/LoginResponse.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/controllers/SubscriptionController.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/entities/Organisation.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/models/OrganisationDTO.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/main/java/ro/bynaus/nohs/mappers/UserMapper.java
