@@ -37,14 +37,11 @@ public class PostsController {
 
     @PostMapping("/api/v1/post")
     public ResponseEntity<PostDTO> checkPost(@AuthenticationPrincipal UserPrincipal principal, @RequestBody String origPost) {
-        System.out.println("Inside controller");
-        System.out.println(origPost);
         try {
             PostDTO checkedPost = postsService.checkPost(principal, origPost);
 
             return ResponseEntity.created(null).body(checkedPost);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }

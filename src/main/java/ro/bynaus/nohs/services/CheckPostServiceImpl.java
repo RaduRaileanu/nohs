@@ -1,14 +1,23 @@
 package ro.bynaus.nohs.services;
 
+import lombok.RequiredArgsConstructor;
 import ro.bynaus.nohs.entities.Service;
 import ro.bynaus.nohs.models.CheckPostInfo;
 import ro.bynaus.nohs.models.PostDTO;
 
 @org.springframework.stereotype.Service
+@RequiredArgsConstructor
 public class CheckPostServiceImpl implements CheckPostService {
+
+    private final OpenAiService openAiService;
 
     @Override
     public CheckPostInfo runPostCheck(Service service, String origPost) {
+
+        String prompt = service.getMessage() + "'" + origPost + "'";
+
+        openAiService.evaluatePost(prompt);
+
         String redactedContent = origPost.replace("Romanians are scumbags", "******");
         String justification = "Affirming hatred towards a nation is not protected by freedom of speech";
         if (service.getId() == 1) {
