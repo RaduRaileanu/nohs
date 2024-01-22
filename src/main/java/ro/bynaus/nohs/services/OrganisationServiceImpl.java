@@ -60,7 +60,6 @@ public class OrganisationServiceImpl implements OrganisationService {
     public OrganisationDTO updateOrganisation(UserPrincipal principal, OrganisationDTO organisation) throws Error {
         
         User user = userRepository.findById(principal.getUserId()).orElse(null);
-        System.out.println("admin".equals(user.getRole()));
 
         if (!"admin".equals(user.getRole())){
             throw new Error("The user must be an admin to update organisation");

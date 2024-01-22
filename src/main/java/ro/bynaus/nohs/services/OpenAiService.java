@@ -8,8 +8,11 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import lombok.RequiredArgsConstructor;
 import ro.bynaus.nohs.integrations.OpenAiProperties;
+import ro.bynaus.nohs.models.OpenAiResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +21,7 @@ public class OpenAiService {
 
     private final OpenAiProperties openAiProperties;
 
-    public String evaluatePost (String prompt){
+    public OpenAiResponse evaluatePost (String prompt){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer " + openAiProperties.getApiKey());
@@ -35,10 +38,14 @@ public class OpenAiService {
 
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        String response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class).getBody();
+        JsonNode response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, JsonNode.class).getBody();
 
-        System.out.println(response);
+        OpenAiResponse openAiResponse = OpenAiResponse.builder()
+                                                        .message(response.at("/choices/0/message/content").asText())
+                                                        .promptTokens(response.at("/choices/usage/prompt_tokens").asInt())
+                                                        .completionTokens(response.at("/choices/usage/completion_tokens").asInt())        
+                                                        .build();
 
-        return response;
+        return openAiResponse;
     }
 }

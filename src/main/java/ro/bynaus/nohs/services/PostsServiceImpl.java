@@ -13,6 +13,7 @@ import ro.bynaus.nohs.entities.User;
 import ro.bynaus.nohs.mappers.PostMapper;
 import ro.bynaus.nohs.models.CheckPostInfo;
 import ro.bynaus.nohs.models.PostDTO;
+import ro.bynaus.nohs.models.PostEvaluationDTO;
 import ro.bynaus.nohs.repositories.OrganisationRepository;
 import ro.bynaus.nohs.repositories.PostRepository;
 import ro.bynaus.nohs.repositories.SubscriptionRepository;
@@ -37,7 +38,7 @@ public class PostsServiceImpl implements PostsService {
     }
 
     @Override
-    public PostDTO checkPost(UserPrincipal principal, String origPost) throws Error {
+    public PostEvaluationDTO checkPost(UserPrincipal principal, String origPost) throws Error {
         User user = userRepository.findById(principal.getUserId()).orElse(null);
 
         if(!(user.getSubscription() != null || (user.getOrganisation() != null && user.getOrganisation().getSubscription() != null))){
@@ -84,7 +85,14 @@ public class PostsServiceImpl implements PostsService {
         }
 
         Post savedPost = postRepository.save(post);
+        
+        PostEvaluationDTO postEvaluation = PostEvaluationDTO.builder()
+                                                            .hateSpeech(savedPost.getHateSpeech())
+                                                            .originalContent(savedPost.getOriginalContent())
+                                                            .redactedContent(savedPost.getRedactedContent())
+                                                            .justification(savedPost.getJustification())
+                                                            .build();
        
-        return postMapper.postToPostDto(savedPost);
+        return postEvaluation;
     }
 }

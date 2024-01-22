@@ -37,7 +37,6 @@ public class UserController {
 
     @DeleteMapping("/user")
     public ResponseEntity softDeleteAccount(@AuthenticationPrincipal UserPrincipal principal){
-        System.out.println("Delete user");
         userService.softDeleteUser(principal);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -45,7 +44,6 @@ public class UserController {
     
     @DeleteMapping("/user/{userId}")
     public ResponseEntity softDeleteUser(@AuthenticationPrincipal UserPrincipal principal, @PathVariable("userId") Integer userId){
-        System.out.println("Delete employee");
         userService.softDeleteEmployee(principal, userId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);

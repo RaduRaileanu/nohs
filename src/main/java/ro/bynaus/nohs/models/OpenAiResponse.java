@@ -1,0 +1,18 @@
+package ro.bynaus.nohs.models;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class OpenAiResponse {
+    private String message;
+    private Integer promptTokens;
+    private Integer completionTokens;
+}

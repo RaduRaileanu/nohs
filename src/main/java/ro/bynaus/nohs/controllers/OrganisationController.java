@@ -63,7 +63,6 @@ public class OrganisationController {
             }
             
         } catch (Exception e) {
-            // System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }

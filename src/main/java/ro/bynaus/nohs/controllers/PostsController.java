@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import ro.bynaus.nohs.entities.User;
 import ro.bynaus.nohs.models.PostDTO;
+import ro.bynaus.nohs.models.PostEvaluationDTO;
 import ro.bynaus.nohs.repositories.UserRepository;
 import ro.bynaus.nohs.security.UserPrincipal;
 import ro.bynaus.nohs.services.PostsService;
@@ -36,9 +37,9 @@ public class PostsController {
     }
 
     @PostMapping("/api/v1/post")
-    public ResponseEntity<PostDTO> checkPost(@AuthenticationPrincipal UserPrincipal principal, @RequestBody String origPost) {
+    public ResponseEntity<PostEvaluationDTO> checkPost(@AuthenticationPrincipal UserPrincipal principal, @RequestBody String origPost) {
         try {
-            PostDTO checkedPost = postsService.checkPost(principal, origPost);
+            PostEvaluationDTO checkedPost = postsService.checkPost(principal, origPost);
 
             return ResponseEntity.created(null).body(checkedPost);
         } catch (Exception e) {

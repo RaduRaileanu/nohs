@@ -3,6 +3,7 @@ package ro.bynaus.nohs.services;
 import lombok.RequiredArgsConstructor;
 import ro.bynaus.nohs.entities.Service;
 import ro.bynaus.nohs.models.CheckPostInfo;
+import ro.bynaus.nohs.models.OpenAiResponse;
 import ro.bynaus.nohs.models.PostDTO;
 
 @org.springframework.stereotype.Service
@@ -16,19 +17,24 @@ public class CheckPostServiceImpl implements CheckPostService {
 
         String prompt = service.getMessage() + "'" + origPost + "'";
 
-        openAiService.evaluatePost(prompt);
+        OpenAiResponse response = openAiService.evaluatePost(prompt);
 
-        String redactedContent = origPost.replace("Romanians are scumbags", "******");
-        String justification = "Affirming hatred towards a nation is not protected by freedom of speech";
+        Double cost = response.getPromptTokens() * 0.001 + response.getCompletionTokens() * 0.002;
+
+        String[] parts = response.getMessage().split("\\d+\\.");
+
         if (service.getId() == 1) {
+            Boolean isHateSpeech = "no".equals(parts[1].trim().toLowerCase()) ? false : true;
+            String hateSpeech = parts[3].replaceAll("^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$", "");
+            String redactedContent = isHateSpeech ? origPost.replace(hateSpeech, "*****") : origPost;
             PostDTO postDto = PostDTO.builder()
                                         .originalContent(origPost)
                                         .redactedContent(redactedContent)
-                                        .justification(justification)
-                                        .hateSpeech(true)
+                                        .justification(isHateSpeech ? parts[2].trim(): null)
+                                        .hateSpeech(isHateSpeech)
                                         .build();
             CheckPostInfo checkPostInfo = CheckPostInfo.builder()
-                                                        .cost(0.05)
+                                                        .cost(cost)
                                                         .postDTO(postDto)
                                                         .build();
 
@@ -36,13 +42,16 @@ public class CheckPostServiceImpl implements CheckPostService {
         }
 
         else if(service.getId() == 2){
+            Boolean isHateSpeech = "no".equals(parts[1].trim().toLowerCase()) ? false : true;
+            String hateSpeech = parts[3].replaceAll("^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$", "");
+            String redactedContent = isHateSpeech ? origPost.replace(hateSpeech, "*****") : origPost;
             PostDTO postDto = PostDTO.builder()
                                         .originalContent(origPost)
                                         .redactedContent(redactedContent)
-                                        .hateSpeech(true)
+                                        .hateSpeech(isHateSpeech)
                                         .build();
             CheckPostInfo checkPostInfo = CheckPostInfo.builder()
-                                                        .cost(0.03)
+                                                        .cost(cost)
                                                         .postDTO(postDto)
                                                         .build();
 
@@ -50,12 +59,13 @@ public class CheckPostServiceImpl implements CheckPostService {
         }
 
         else {
+            Boolean isHateSpeech = "no".equals(parts[0].trim().toLowerCase()) ? false : true;
             PostDTO postDto = PostDTO.builder()
                                         .originalContent(origPost)
-                                        .hateSpeech(true)
+                                        .hateSpeech(isHateSpeech)
                                         .build();
             CheckPostInfo checkPostInfo = CheckPostInfo.builder()
-                                                        .cost(0.01)
+                                                        .cost(cost)
                                                         .postDTO(postDto)
                                                         .build();
 
