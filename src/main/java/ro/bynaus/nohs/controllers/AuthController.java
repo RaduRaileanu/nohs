@@ -12,7 +12,6 @@ import ro.bynaus.nohs.models.UserDTO;
 import ro.bynaus.nohs.repositories.UserRepository;
 import ro.bynaus.nohs.security.JwtIssuer;
 import ro.bynaus.nohs.security.UserPrincipal;
-import ro.bynaus.nohs.services.UserService;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,31 +27,51 @@ public class AuthController {
 
     private final JwtIssuer jwtIssuer;
     private final AuthenticationManager authenticationManager;
-    // private final UserService userService;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     
+    /**
+     * Controller method for handling user authentication and login.
+     * Endpoint: POST "/auth/login"
+     *
+     * @param loginCredentials The credentials provided by the user for login.
+     * @return A response containing the access token upon successful login.
+     */
     @PostMapping("/auth/login")
     public LoginResponse login(@RequestBody LoginCredentialsDTO loginCredentials){
+        // Authenticate user
         var authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginCredentials.getEmail(), loginCredentials.getPassword())
         );
 
+        // Set the authentication in the SecurityContextHolder
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        // Get user principal details
         var principal = (UserPrincipal) authentication.getPrincipal();
 
+        // Extract user roles
         var roles = principal.getAuthorities().stream()
                             .map(grantedAuthority -> grantedAuthority.getAuthority())
                             .toList();
 
+        // Generate JWT token
         var token = jwtIssuer.issue(principal.getUserId(), principal.getEmail(), roles);
+
+        // Return login response with the generated access token
         return LoginResponse.builder()
                                 .accessToken(token)
                                 .build();
     }
 
+    /**
+     * Controller method for handling user registration.
+     * Endpoint: POST "/auth/register"
+     *
+     * @param userDTO The information required for user registration.
+     * @return A response containing the access token upon successful login.
+     */
     @PostMapping("/auth/register")
     public RegisterResponse createUser(@RequestBody UserDTO userDTO) {
 

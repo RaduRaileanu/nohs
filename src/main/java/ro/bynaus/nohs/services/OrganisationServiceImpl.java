@@ -24,6 +24,16 @@ public class OrganisationServiceImpl implements OrganisationService {
     private final OrganisationRepository organisationRepository;
     private final OrganisationMapper organisationMapper;
     
+    /**
+     * Retrieve the organisation associated with the authenticated user.
+     *
+     * <p>This method fetches the user from the UserRepository based on the provided UserPrincipal.
+     * If the user has an associated organisation, it is converted to an OrganisationDTO using the
+     * OrganisationMapper and returned. If the user does not belong to any organisation, null is returned.
+     *
+     * @param principal The authenticated user's principal containing user details.
+     * @return An OrganisationDTO representing the organisation associated with the user, or null if none.
+     */
     @Override
     public OrganisationDTO getAuthUserOrganisation(UserPrincipal principal) {
         
@@ -36,6 +46,17 @@ public class OrganisationServiceImpl implements OrganisationService {
         return null;
     }
 
+    /**
+     * Store an organisation associated with the authenticated user.
+     *
+     * <p>This method creates a new Organisation entity from the provided OrganisationDTO,
+     * associates the authenticated user with the organisation, and saves it to the database.
+     * The stored organisation is then converted to an OrganisationDTO and returned.
+     *
+     * @param principal       The authenticated user's principal containing user details.
+     * @param organisationDto The OrganisationDTO containing details of the organisation to be stored.
+     * @return The OrganisationDTO representing the stored organisation.
+     */
     @Override
     public OrganisationDTO storeOrganisation(UserPrincipal principal, OrganisationDTO organisationDto) {
         
@@ -56,6 +77,18 @@ public class OrganisationServiceImpl implements OrganisationService {
         return savedOrganisationDTO;
     }
 
+    /**
+     * Update details of the organisation associated with the authenticated user.
+     *
+     * <p>This method first checks if the authenticated user is an admin. If not, it throws an error.
+     * It then retrieves the existing organisation details, updates them based on the provided OrganisationDTO,
+     * and saves the changes to the database. The updated organisation is converted to an OrganisationDTO and returned.
+     *
+     * @param principal   The authenticated user's principal containing user details.
+     * @param organisation The OrganisationDTO containing updated details of the organisation.
+     * @return The OrganisationDTO representing the updated organisation.
+     * @throws Error If the authenticated user is not an admin.
+     */
     @Override
     public OrganisationDTO updateOrganisation(UserPrincipal principal, OrganisationDTO organisation) throws Error {
         
@@ -87,6 +120,16 @@ public class OrganisationServiceImpl implements OrganisationService {
         return organisationMapper.organisationToOrganisationDTO(savedOrganisation);
     }
 
+    /**
+     * Soft delete the organisation associated with the authenticated user.
+     *
+     * <p>This method checks if the authenticated user is an admin. If not, it throws an error.
+     * It then retrieves the user's organisation, marks it as deleted by setting the "deletedAt" timestamp,
+     * and saves the changes to the database.
+     *
+     * @param principal The authenticated user's principal containing user details.
+     * @throws Error If the authenticated user is not an admin or does not belong to any organisation.
+     */
     @Override
     public void softDeleteOrganisation(UserPrincipal principal) throws Error {
         

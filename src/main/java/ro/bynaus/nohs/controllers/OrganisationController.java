@@ -1,7 +1,5 @@
 package ro.bynaus.nohs.controllers;
 
-import java.net.URI;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Component
@@ -30,6 +27,12 @@ public class OrganisationController {
 
     private final OrganisationService organisationService;
 
+    /**
+     * Retrieve the organisation details for the authenticated user.
+     *
+     * @param principal The authenticated user principal.
+     * @return ResponseEntity with the OrganisationDTO if found, else returns a not found response.
+     */
     @GetMapping(ORGANISATION_PATH)
     public ResponseEntity<OrganisationDTO> getAuthUserOrganisation(@AuthenticationPrincipal UserPrincipal principal) {
         
@@ -42,6 +45,13 @@ public class OrganisationController {
         }    
     }
 
+    /**
+     * Store an organisation for the authenticated user.
+     *
+     * @param principal   The authenticated user principal.
+     * @param organisation The OrganisationDTO containing the details of the organisation to be stored.
+     * @return ResponseEntity with the created OrganisationDTO.
+     */
     @PostMapping(ORGANISATION_PATH)
     public ResponseEntity<OrganisationDTO> storeOrganisation(@AuthenticationPrincipal UserPrincipal principal, @RequestBody OrganisationDTO organisation){
         
@@ -50,6 +60,13 @@ public class OrganisationController {
         return ResponseEntity.created(null).body(savedOrganisation);
     }
 
+    /**
+     * Update the details of the authenticated user's organisation.
+     *
+     * @param principal   The authenticated user principal.
+     * @param organisation The OrganisationDTO containing the updated details of the organisation.
+     * @return ResponseEntity with the updated OrganisationDTO if successful, else returns a not found or forbidden response.
+     */
     @PatchMapping(ORGANISATION_PATH)
     public ResponseEntity<OrganisationDTO> updateOrganisation(@AuthenticationPrincipal UserPrincipal principal, @RequestBody OrganisationDTO organisation){
         
@@ -67,6 +84,12 @@ public class OrganisationController {
         }
     }
 
+    /**
+     * Soft delete the organisation associated with the authenticated user.
+     *
+     * @param principal The authenticated user principal.
+     * @return ResponseEntity with no content if successful, else returns a forbidden or bad request response.
+     */
     @DeleteMapping(ORGANISATION_PATH)
     public ResponseEntity<Void> deleteOrganisation(@AuthenticationPrincipal UserPrincipal principal){
         try {

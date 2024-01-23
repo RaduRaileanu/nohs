@@ -27,11 +27,24 @@ public class SubscriptionController {
 
     private final SubscriptionService subscriptionService;
 
+    /**
+     * Retrieve the subscription details for the authenticated user.
+     *
+     * @param principal The authenticated user principal.
+     * @return SubscriptionDTO representing the subscription details of the authenticated user.
+     */
     @GetMapping(SUBSCRIPTION_PATH)
     public SubscriptionDTO getAuthUserSubscription(@AuthenticationPrincipal UserPrincipal principal) {
         return subscriptionService.getAuthUserSubscription(principal);
     }
     
+    /**
+     * Create a new subscription for the authenticated user.
+     *
+     * @param principal The authenticated user principal.
+     * @param serviceId The ID of the service to subscribe to.
+     * @return ResponseEntity with the created SubscriptionDTO if successful, else returns a forbidden response.
+     */
     @PostMapping(SUBSCRIPTION_PATH)
     public ResponseEntity<SubscriptionDTO> createSubscription(@AuthenticationPrincipal UserPrincipal principal, @RequestBody Integer serviceId){
         
@@ -47,6 +60,13 @@ public class SubscriptionController {
         } 
     }
 
+    /**
+     * Update the subscription details for the authenticated user.
+     *
+     * @param principal The authenticated user principal.
+     * @param serviceId The ID of the service to update the subscription for.
+     * @return ResponseEntity with the updated SubscriptionDTO if successful, else returns a forbidden response.
+     */
     @PutMapping(SUBSCRIPTION_PATH)
     public ResponseEntity<SubscriptionDTO> updateSubscription(@AuthenticationPrincipal UserPrincipal principal, @RequestBody Integer serviceId) {
         try {

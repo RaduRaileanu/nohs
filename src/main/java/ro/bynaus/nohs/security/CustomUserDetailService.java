@@ -1,7 +1,6 @@
 package ro.bynaus.nohs.security;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import ro.bynaus.nohs.entities.User;
-import ro.bynaus.nohs.repositories.UserRepository;
 import ro.bynaus.nohs.services.UserService;
 
 @Component
@@ -20,6 +18,13 @@ public class CustomUserDetailService implements UserDetailsService {
 
     private final UserService userService;
 
+    /**
+     * Load user details by username for authentication.
+     *
+     * @param username The username (email) for which user details are to be loaded.
+     * @return A {@code UserDetails} object representing the authenticated user.
+     * @throws UsernameNotFoundException If the user with the given username is not found.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 

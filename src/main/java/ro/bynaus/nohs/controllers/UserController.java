@@ -27,6 +27,13 @@ public class UserController {
 
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Update the details of the authenticated user.
+     *
+     * @param principal The authenticated user principal.
+     * @param userDTO   The UserDTO containing the updated user details.
+     * @return UserDTO representing the updated user details.
+     */
     @PostMapping("/user")
     public UserDTO updateUser(@AuthenticationPrincipal UserPrincipal principal, @RequestBody UserDTO userDTO) {
         
@@ -35,17 +42,30 @@ public class UserController {
         return userService.updateUser(principal, userDTO);
     }
 
+    /**
+     * Soft delete the account of the authenticated user.
+     *
+     * @param principal The authenticated user principal.
+     * @return ResponseEntity with no content if successful.
+     */
     @DeleteMapping("/user")
-    public ResponseEntity softDeleteAccount(@AuthenticationPrincipal UserPrincipal principal){
+    public ResponseEntity<Void> softDeleteAccount(@AuthenticationPrincipal UserPrincipal principal){
         userService.softDeleteUser(principal);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
     
+    /**
+     * Soft delete an employee by their ID, performed by the authenticated user.
+     *
+     * @param principal The authenticated user principal.
+     * @param userId    The ID of the user to be deleted.
+     * @return ResponseEntity with no content if successful, else returns a not found response.
+     */
     @DeleteMapping("/user/{userId}")
-    public ResponseEntity softDeleteUser(@AuthenticationPrincipal UserPrincipal principal, @PathVariable("userId") Integer userId){
+    public ResponseEntity<Void> softDeleteEmployee(@AuthenticationPrincipal UserPrincipal principal, @PathVariable("userId") Integer userId){
         userService.softDeleteEmployee(principal, userId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 }
