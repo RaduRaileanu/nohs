@@ -21,7 +21,7 @@ public class OpenAiService {
 
     private final OpenAiProperties openAiProperties;
 
-    public OpenAiResponse evaluatePost (String prompt){
+    public OpenAiResponse callGpt (String prompt){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer " + openAiProperties.getApiKey());

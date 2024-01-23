@@ -17,7 +17,7 @@ public class CheckPostServiceImpl implements CheckPostService {
 
         String prompt = service.getMessage() + "'" + origPost + "'";
 
-        OpenAiResponse response = openAiService.evaluatePost(prompt);
+        OpenAiResponse response = openAiService.callGpt(prompt);
 
         Double cost = response.getPromptTokens() * 0.001 + response.getCompletionTokens() * 0.002;
 
@@ -27,10 +27,20 @@ public class CheckPostServiceImpl implements CheckPostService {
             Boolean isHateSpeech = "no".equals(parts[1].trim().toLowerCase()) ? false : true;
             String hateSpeech = parts[3].replaceAll("^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$", "");
             String redactedContent = isHateSpeech ? origPost.replace(hateSpeech, "*****") : origPost;
+            String language = parts[4].trim().toLowerCase();
+            String justification = null;
+            if(isHateSpeech && !"english".equals(language)){
+                prompt = "Translate the following text in " + language + ": '" + parts[2].trim() + "'";
+
+                OpenAiResponse translationResponse = openAiService.callGpt(prompt);
+
+                justification = translationResponse.getMessage();
+                cost += translationResponse.getPromptTokens() * 0.001 + translationResponse.getCompletionTokens() * 0.002;
+            }
             PostDTO postDto = PostDTO.builder()
                                         .originalContent(origPost)
                                         .redactedContent(redactedContent)
-                                        .justification(isHateSpeech ? parts[2].trim(): null)
+                                        .justification(justification)
                                         .hateSpeech(isHateSpeech)
                                         .build();
             CheckPostInfo checkPostInfo = CheckPostInfo.builder()
@@ -43,7 +53,7 @@ public class CheckPostServiceImpl implements CheckPostService {
 
         else if(service.getId() == 2){
             Boolean isHateSpeech = "no".equals(parts[1].trim().toLowerCase()) ? false : true;
-            String hateSpeech = parts[3].replaceAll("^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$", "");
+            String hateSpeech = parts[2].replaceAll("^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$", "");
             String redactedContent = isHateSpeech ? origPost.replace(hateSpeech, "*****") : origPost;
             PostDTO postDto = PostDTO.builder()
                                         .originalContent(origPost)

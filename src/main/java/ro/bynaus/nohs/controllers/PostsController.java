@@ -43,7 +43,9 @@ public class PostsController {
 
             return ResponseEntity.created(null).body(checkedPost);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+
+            throw e;
+            // return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }
     
