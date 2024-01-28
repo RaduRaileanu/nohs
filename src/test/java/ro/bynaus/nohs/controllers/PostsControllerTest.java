@@ -43,8 +43,8 @@ class PostsControllerTest {
         UserPrincipal userPrincipal = UserPrincipal.builder()
                                             .userId(1)
                                             .email("test@example.com")
-                                            .password("USER")  // Replace "USER" with the actual password
-                                            .authorities(Collections.emptyList())  // You might need to provide authorities here
+                                            .password("USER") 
+                                            .authorities(Collections.emptyList()) 
                                             .build();
         User user = new User();
         user.setId(1);
