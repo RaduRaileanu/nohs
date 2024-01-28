@@ -28,7 +28,7 @@ public class OrganisationControllerTest {
     public void testGetAuthUserOrganisation() {
         // Mock data
         UserPrincipal principal = mock(UserPrincipal.class);
-        OrganisationDTO organisationDTO = new OrganisationDTO(/* provide necessary data */);
+        OrganisationDTO organisationDTO = new OrganisationDTO();
         when(organisationService.getAuthUserOrganisation(any())).thenReturn(organisationDTO);
 
         // Perform the test
@@ -58,8 +58,8 @@ public class OrganisationControllerTest {
     public void testStoreOrganisation() {
         // Mock data
         UserPrincipal principal = mock(UserPrincipal.class);
-        OrganisationDTO inputOrganisation = new OrganisationDTO(/* provide necessary data */);
-        OrganisationDTO savedOrganisation = new OrganisationDTO(/* provide necessary data */);
+        OrganisationDTO inputOrganisation = new OrganisationDTO();
+        OrganisationDTO savedOrganisation = new OrganisationDTO();
         when(organisationService.storeOrganisation(any(), any())).thenReturn(savedOrganisation);
 
         // Perform the test
@@ -75,8 +75,8 @@ public class OrganisationControllerTest {
     public void testUpdateOrganisation() {
         // Mock data
         UserPrincipal principal = mock(UserPrincipal.class);
-        OrganisationDTO inputOrganisation = new OrganisationDTO(/* provide necessary data */);
-        OrganisationDTO savedOrganisation = new OrganisationDTO(/* provide necessary data */);
+        OrganisationDTO inputOrganisation = new OrganisationDTO();
+        OrganisationDTO savedOrganisation = new OrganisationDTO();
         when(organisationService.updateOrganisation(any(), any())).thenReturn(savedOrganisation);
 
         // Perform the test
@@ -92,7 +92,7 @@ public class OrganisationControllerTest {
     public void testUpdateOrganisation_NotFound() {
         // Mock data
         UserPrincipal principal = mock(UserPrincipal.class);
-        OrganisationDTO inputOrganisation = new OrganisationDTO(/* provide necessary data */);
+        OrganisationDTO inputOrganisation = new OrganisationDTO();
         when(organisationService.updateOrganisation(any(), any())).thenReturn(null);
 
         // Perform the test
@@ -107,7 +107,7 @@ public class OrganisationControllerTest {
     public void testUpdateOrganisation_Forbidden() {
         // Mock data
         UserPrincipal principal = mock(UserPrincipal.class);
-        OrganisationDTO inputOrganisation = new OrganisationDTO(/* provide necessary data */);
+        OrganisationDTO inputOrganisation = new OrganisationDTO();
         when(organisationService.updateOrganisation(any(), any())).thenThrow(new SomeForbiddenException());
 
         // Perform the test

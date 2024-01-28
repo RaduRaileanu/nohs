@@ -67,8 +67,8 @@ class PostsControllerTest {
         UserPrincipal userPrincipal = UserPrincipal.builder()
                                             .userId(1)
                                             .email("test@example.com")
-                                            .password("USER")  // Replace "USER" with the actual password
-                                            .authorities(Collections.emptyList())  // You might need to provide authorities here
+                                            .password("USER")
+                                            .authorities(Collections.emptyList())
                                             .build();
         String origPost = "This is a test post.";
         PostEvaluationDTO expectedPostEvaluationDTO = PostEvaluationDTO.builder().build();
@@ -89,8 +89,8 @@ class PostsControllerTest {
         UserPrincipal userPrincipal = UserPrincipal.builder()
                                             .userId(1)
                                             .email("test@example.com")
-                                            .password("USER")  // Replace "USER" with the actual password
-                                            .authorities(Collections.emptyList())  // You might need to provide authorities here
+                                            .password("USER")
+                                            .authorities(Collections.emptyList())
                                             .build();
         String origPost = "This is a test post.";
         when(postsService.checkPost(userPrincipal, origPost)).thenThrow(new RuntimeException("Test exception"));
