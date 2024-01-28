@@ -2,6 +2,7 @@ package ro.bynaus.nohs.services;
 
 import lombok.RequiredArgsConstructor;
 import ro.bynaus.nohs.entities.Service;
+import ro.bynaus.nohs.integrations.OpenAiService;
 import ro.bynaus.nohs.models.CheckPostInfo;
 import ro.bynaus.nohs.models.OpenAiResponse;
 import ro.bynaus.nohs.models.PostDTO;

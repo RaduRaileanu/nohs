@@ -9,7 +9,7 @@ import ro.bynaus.nohs.models.SubscriptionDTO;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-22T08:52:18+0200",
+    date = "2024-01-28T11:29:57+0200",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21 (Oracle Corporation)"
 )
 @Component

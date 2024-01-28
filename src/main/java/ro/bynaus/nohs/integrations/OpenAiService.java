@@ -1,4 +1,4 @@
-package ro.bynaus.nohs.services;
+package ro.bynaus.nohs.integrations;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import lombok.RequiredArgsConstructor;
-import ro.bynaus.nohs.integrations.OpenAiProperties;
 import ro.bynaus.nohs.models.OpenAiResponse;
 
 @Service
