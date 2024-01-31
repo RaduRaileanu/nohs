@@ -1,4 +1,11 @@
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/controllers/PostsControllerTest.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/services/UserServiceImplTest.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/controllers/UserControllerTest.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/controllers/SubscriptionControllerTest.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/NohsApplicationTests.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/controllers/OrganisationControllerTest.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/services/PostsServiceImplTest.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/services/CheckPostServiceImplTest.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/services/OrganisationServiceImplTest.java
 /Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/controllers/AuthControllerTest.java
+/Users/mb_pro/Documents/Programare/Spring/nohs/src/test/java/ro/bynaus/nohs/services/SubscriptionServiceImplTest.java
