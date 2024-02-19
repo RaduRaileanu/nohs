@@ -29,8 +29,7 @@ public class WebSecurityConfig {
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-        http.cors().disable()
-            .csrf().disable()
+        http.csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .formLogin().disable()
             .securityMatcher("/**")
