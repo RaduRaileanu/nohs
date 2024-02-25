@@ -85,7 +85,7 @@ public class AuthController {
         }
 
         // encode the user's password
-        String encodedPassword = passwordEncoder.encode(userDTO.getEmail());
+        String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
         userDTO.setPassword(encodedPassword);
         
         // save the new user to the database
